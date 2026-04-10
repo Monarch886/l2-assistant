@@ -2,9 +2,9 @@ package ru.che.lcp.client.view;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import ru.che.lcp.client.dto.HypothesisDto;
 import ru.che.lcp.client.dto.UserDto;
 import ru.che.lcp.client.enums.CriticalityTypeDto;
-import ru.che.lcp.client.dto.HypothesisDto;
 
 import java.util.List;
 

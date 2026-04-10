@@ -15,7 +15,8 @@ On Windows, use `gradlew.bat` instead of `./gradlew`.
 
 ## Project Overview
 
-**L2Agent** is a Java project scaffolded with Gradle 9.0.0, targeting JDK 17. It is currently a skeleton — `src/main/java/ru/che/lcp/Main.java` is the only source file and contains only template code.
+**L2Agent** is a Java project scaffolded with Gradle 9.0.0, targeting JDK 17. It is currently a skeleton —
+`src/main/java/ru/che/lcp/Main.java` is the only source file and contains only template code.
 
 - **Group:** `ru.che.lcp`
 - **Build:** Gradle 9.0.0 (wrapper at `gradle/wrapper/`)
@@ -24,4 +25,5 @@ On Windows, use `gradlew.bat` instead of `./gradlew`.
 
 ## Architecture
 
-There is no meaningful architecture yet. The entry point is `ru.che.lcp.Main`. New code should be placed under `src/main/java/ru/che/lcp/` and tests under `src/test/java/ru/che/lcp/`.
+There is no meaningful architecture yet. The entry point is `ru.che.lcp.Main`. New code should be placed under
+`src/main/java/ru/che/lcp/` and tests under `src/test/java/ru/che/lcp/`.

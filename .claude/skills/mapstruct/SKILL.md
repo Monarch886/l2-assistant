@@ -32,14 +32,15 @@ import static org.mapstruct.ReportingPolicy.ERROR;
         unmappedTargetPolicy = ERROR,           // незамапленное поле = ошибка компиляции
         nullValueCheckStrategy = ALWAYS,        // всегда проверять source на null перед маппингом
         nullValuePropertyMappingStrategy = IGNORE) // null в source → не трогать target поле
-interface SomeMapper { ... }
+interface SomeMapper { ...
+}
 ```
 
-| Политика | Значение | Зачем |
-|---|---|---|
-| `unmappedTargetPolicy = ERROR` | незамапленное поле в target → ошибка компиляции | не пропустить поле молча |
-| `nullValueCheckStrategy = ALWAYS` | проверять каждое source-поле на null | защита от NPE при маппинге |
-| `nullValuePropertyMappingStrategy = IGNORE` | null source → target поле не трогать | не затирать дефолты null'ом |
+| Политика                                    | Значение                                        | Зачем                       |
+|---------------------------------------------|-------------------------------------------------|-----------------------------|
+| `unmappedTargetPolicy = ERROR`              | незамапленное поле в target → ошибка компиляции | не пропустить поле молча    |
+| `nullValueCheckStrategy = ALWAYS`           | проверять каждое source-поле на null            | защита от NPE при маппинге  |
+| `nullValuePropertyMappingStrategy = IGNORE` | null source → target поле не трогать            | не затирать дефолты null'ом |
 
 Если поле намеренно не маппится — явно указывать `@Mapping(target = "field", ignore = true)`.
 
@@ -74,37 +75,37 @@ interface HypothesisMapper {
 
 ## Названия Методов
 
-| Метод      | Направление                              |
-|------------|------------------------------------------|
-| `toView`   | domain model → API response (View)       |
-| `toDto`    | domain model → вложенный DTO             |
-| `toModel`  | DTO / entity / MR → domain model         |
-| `toEntity` | domain model → DB entity                 |
+| Метод      | Направление                        |
+|------------|------------------------------------|
+| `toView`   | domain model → API response (View) |
+| `toDto`    | domain model → вложенный DTO       |
+| `toModel`  | DTO / entity / MR → domain model   |
+| `toEntity` | domain model → DB entity           |
 
 Запрещено: `toResponse`, `convert`, `map`, `from`, `transform`, `toXxxResponse`.
 
 ## Названия Параметров Отражают Слой Источника
 
-| Слой-источник          | Имя параметра | Пример                              |
-|------------------------|---------------|-------------------------------------|
-| Domain model           | `model`       | `toView(Incident model)`            |
-| API DTO / request      | `dto`         | `toModel(IncidentRequest dto)`      |
-| DB entity              | `entity`      | `toModel(IncidentEntity entity)`    |
-| AI/LLM machine result  | `mr`          | `toModel(IncidentMr mr)`            |
-| API view               | `view`        | `toModel(IncidentView view)`        |
+| Слой-источник         | Имя параметра | Пример                           |
+|-----------------------|---------------|----------------------------------|
+| Domain model          | `model`       | `toView(Incident model)`         |
+| API DTO / request     | `dto`         | `toModel(IncidentRequest dto)`   |
+| DB entity             | `entity`      | `toModel(IncidentEntity entity)` |
+| AI/LLM machine result | `mr`          | `toModel(IncidentMr mr)`         |
+| API view              | `view`        | `toModel(IncidentView view)`     |
 
 ## Нейминг Классов по Слоям
 
-| Слой                  | Пакет              | Суффикс класса | Примеры                          |
-|-----------------------|--------------------|----------------|----------------------------------|
-| Domain model          | `domain`           | (нет)          | `Incident`, `User`, `Hypothesis` |
-| Domain enum           | `domain.enums`     | `Type`         | `CriticalityType`                |
-| API response          | `client.view`      | `View`         | `IncidentView`                   |
-| Nested API DTO        | `client.dto`       | `Dto`          | `HypothesisDto`, `UserDto`       |
-| API enum              | `client.enums`     | `TypeDto`      | `CriticalityTypeDto`             |
-| API request           | `client.reqres`    | `Request`      | `IncidentRequest`                |
-| AI/LLM response model | `aiclient.md`      | `Mr`           | `IncidentMr`                     |
-| DB entity             | `infrastructure`   | `Entity`       | `IncidentEntity`                 |
+| Слой                  | Пакет            | Суффикс класса | Примеры                          |
+|-----------------------|------------------|----------------|----------------------------------|
+| Domain model          | `domain`         | (нет)          | `Incident`, `User`, `Hypothesis` |
+| Domain enum           | `domain.enums`   | `Type`         | `CriticalityType`                |
+| API response          | `client.view`    | `View`         | `IncidentView`                   |
+| Nested API DTO        | `client.dto`     | `Dto`          | `HypothesisDto`, `UserDto`       |
+| API enum              | `client.enums`   | `TypeDto`      | `CriticalityTypeDto`             |
+| API request           | `client.reqres`  | `Request`      | `IncidentRequest`                |
+| AI/LLM response model | `aiclient.md`    | `Mr`           | `IncidentMr`                     |
+| DB entity             | `infrastructure` | `Entity`       | `IncidentEntity`                 |
 
 ## Шаблон для Нового Доменного Объекта
 

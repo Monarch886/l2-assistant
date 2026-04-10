@@ -10,7 +10,7 @@ import static java.util.regex.Pattern.CASE_INSENSITIVE;
 /**
  * Защита от prompt injection — детектирует попытки перезаписать инструкции LLM.
  * При обнаружении бросает {@link PromptInjectionException} (400 Bad Request).
- *
+ * <p>
  * Работает в паре со структурной изоляцией в AnalysisPort:
  * даже если паттерн не пойман здесь, LLM видит текст как данные внутри тегов, а не как инструкции.
  */
@@ -19,8 +19,8 @@ public class PromptInjectionUtil {
     // --- Перезапись инструкций ---
     private static final Pattern OVERRIDE_INSTRUCTIONS = Pattern.compile(
             "(?:ignore|disregard|bypass|forget|override)\\s+"
-            + "(?:all\\s+)?(?:(?:your|the|prior|previous|above)\\s+){1,2}"
-            + "(?:instructions?|rules?|prompt|guidelines?|constraints?|context)",
+                    + "(?:all\\s+)?(?:(?:your|the|prior|previous|above)\\s+){1,2}"
+                    + "(?:instructions?|rules?|prompt|guidelines?|constraints?|context)",
             CASE_INSENSITIVE
     );
 
@@ -37,7 +37,7 @@ public class PromptInjectionUtil {
     // --- Смена роли / персонажа ---
     private static final Pattern ROLE_SWITCH = Pattern.compile(
             "(?:you\\s+are\\s+now|act\\s+(?:as|like)|pretend\\s+(?:to\\s+be|you\\s+are|you're)|"
-            + "roleplay\\s+as|behave\\s+as|simulate\\s+(?:a|an|the)|take\\s+(?:the\\s+)?role\\s+of)",
+                    + "roleplay\\s+as|behave\\s+as|simulate\\s+(?:a|an|the)|take\\s+(?:the\\s+)?role\\s+of)",
             CASE_INSENSITIVE
     );
 
@@ -45,29 +45,29 @@ public class PromptInjectionUtil {
     private static final Pattern DELIMITER_INJECTION = Pattern.compile(
             // XML/HTML теги переключения ролей
             "</?\s*(?:system|prompt|instruction|assistant|user|human|ai)\s*>"
-            // LLaMA-style [INST], [SYS]
-            + "|\\[/?(?:INST|SYS|SYSTEM|ASSISTANT|USER|END|START)\\]"
-            // ChatML <|im_start|>, <|im_end|>
-            + "|<\\|(?:im_start|im_end|endoftext|startoftext)\\|>"
-            // Markdown заголовки для переключения
-            + "|#{3,}\\s*(?:SYSTEM|INSTRUCTION|PROMPT|END|OVERRIDE|NEW TASK)",
+                    // LLaMA-style [INST], [SYS]
+                    + "|\\[/?(?:INST|SYS|SYSTEM|ASSISTANT|USER|END|START)\\]"
+                    // ChatML <|im_start|>, <|im_end|>
+                    + "|<\\|(?:im_start|im_end|endoftext|startoftext)\\|>"
+                    // Markdown заголовки для переключения
+                    + "|#{3,}\\s*(?:SYSTEM|INSTRUCTION|PROMPT|END|OVERRIDE|NEW TASK)",
             CASE_INSENSITIVE
     );
 
     // --- Попытка извлечь system prompt ---
     private static final Pattern EXTRACT_PROMPT = Pattern.compile(
             "(?:reveal|show|print|repeat|output|display|tell\\s+me|expose|leak)\\s+"
-            + "(?:(?:your|the|my)\\s+)?(?:system\\s+)?(?:prompt|instructions?|rules?|configuration|settings?)",
+                    + "(?:(?:your|the|my)\\s+)?(?:system\\s+)?(?:prompt|instructions?|rules?|configuration|settings?)",
             CASE_INSENSITIVE
     );
 
     private static final List<Entry> CHECKS = List.of(
             new Entry(OVERRIDE_INSTRUCTIONS, "instruction override"),
-            new Entry(NEW_INSTRUCTIONS,      "new instructions injection"),
-            new Entry(FROM_NOW_ON,           "behavioral redirect"),
-            new Entry(ROLE_SWITCH,           "role/persona switch"),
-            new Entry(DELIMITER_INJECTION,   "delimiter injection"),
-            new Entry(EXTRACT_PROMPT,        "system prompt extraction")
+            new Entry(NEW_INSTRUCTIONS, "new instructions injection"),
+            new Entry(FROM_NOW_ON, "behavioral redirect"),
+            new Entry(ROLE_SWITCH, "role/persona switch"),
+            new Entry(DELIMITER_INJECTION, "delimiter injection"),
+            new Entry(EXTRACT_PROMPT, "system prompt extraction")
     );
 
     public static void check(String text) {
@@ -78,5 +78,6 @@ public class PromptInjectionUtil {
         }
     }
 
-    private record Entry(Pattern pattern, String label) {}
+    private record Entry(Pattern pattern, String label) {
+    }
 }

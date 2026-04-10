@@ -14,7 +14,7 @@ public class IncidentRequest {
     @Schema(
             description = "Raw текстовое описание инцидента в произвольной форме",
             example = "Сервис авторизации недоступен с 14:30 MSK. Пользователи не могут войти в систему. " +
-                      "В логах: Connection refused to auth-service:8080.",
+                    "В логах: Connection refused to auth-service:8080.",
             requiredMode = Schema.RequiredMode.REQUIRED,
             minLength = 10,
             maxLength = 5000

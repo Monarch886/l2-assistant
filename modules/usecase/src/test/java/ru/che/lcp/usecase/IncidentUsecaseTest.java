@@ -21,9 +21,12 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class IncidentUsecaseTest {
 
-    @Mock AnalysisPort analysisPort;
-    @Mock IncidentMapper mapper;
-    @InjectMocks IncidentUsecase usecase;
+    @Mock
+    AnalysisPort analysisPort;
+    @Mock
+    IncidentMapper mapper;
+    @InjectMocks
+    IncidentUsecase usecase;
 
     @Test
     void analyze_cleanInput_callsPortAndReturnsModel() {

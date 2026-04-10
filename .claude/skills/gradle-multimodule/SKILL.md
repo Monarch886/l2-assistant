@@ -27,11 +27,11 @@ rootProject.name = 'ProjectName'
 include 'domain', 'usecase', 'controller', 'client', 'ai-client', 'infrastructure'
 
 project(':infrastructure').projectDir = file 'modules/infrastructure'
-project(':domain').projectDir        = file 'modules/domain'
-project(':usecase').projectDir       = file 'modules/usecase'
-project(':controller').projectDir    = file 'modules/controller'
-project(':client').projectDir        = file 'modules/client'
-project(':ai-client').projectDir     = file 'modules/ai-client'
+project(':domain').projectDir = file 'modules/domain'
+project(':usecase').projectDir = file 'modules/usecase'
+project(':controller').projectDir = file 'modules/controller'
+project(':client').projectDir = file 'modules/client'
+project(':ai-client').projectDir = file 'modules/ai-client'
 ```
 
 Каждый новый модуль: одна строка `include` + одна строка `project(':x').projectDir`.
@@ -100,7 +100,8 @@ dependencies {
 }
 ```
 
-Версия берётся из BOM (если BOM подключён в root), иначе явно: `"org.springframework.ai:spring-ai-starter-model-openai:${springAiVersion}"`.
+Версия берётся из BOM (если BOM подключён в root), иначе явно:
+`"org.springframework.ai:spring-ai-starter-model-openai:${springAiVersion}"`.
 
 ## Только `infrastructure` Собирает fat-jar
 

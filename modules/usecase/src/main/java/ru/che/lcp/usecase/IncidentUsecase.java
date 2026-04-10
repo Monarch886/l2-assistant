@@ -6,8 +6,8 @@ import ru.che.lcp.aiclient.AnalysisPort;
 import ru.che.lcp.domain.Incident;
 import ru.che.lcp.usecase.mapper.IncidentMapper;
 
-import static ru.che.lcp.usecase.util.SensitiveDataUtil.sanitize;
 import static ru.che.lcp.usecase.util.PromptInjectionUtil.check;
+import static ru.che.lcp.usecase.util.SensitiveDataUtil.sanitize;
 
 @Service
 @RequiredArgsConstructor

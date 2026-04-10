@@ -21,16 +21,21 @@ import ru.che.lcp.usecase.IncidentUsecase;
 import ru.che.lcp.usecase.mapper.IncidentMapper;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 class IncidentControllerImplTest {
 
-    @Mock IncidentUsecase useCase;
-    @Mock IncidentMapper mapper;
-    @InjectMocks IncidentControllerImpl controller;
+    @Mock
+    IncidentUsecase useCase;
+    @Mock
+    IncidentMapper mapper;
+    @InjectMocks
+    IncidentControllerImpl controller;
 
     MockMvc mockMvc;
     ObjectMapper objectMapper;
