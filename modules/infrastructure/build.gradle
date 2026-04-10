@@ -1,0 +1,37 @@
+plugins {
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+    id 'java'
+}
+
+allprojects {
+    group = 'ru.che.lcp.l2agent'
+    version = "$projectVersion"
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.named("bootJar") {
+    archiveBaseName.set("l2-agent")
+    archiveVersion.set(project.version.toString())
+}
+
+springBoot {
+    mainClass = 'ru.che.lcp.L2AgentApplication'
+}
+
+tasks.named("jar") {
+    enabled = false
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    implementation project(':domain')
+    implementation project(':usecase')
+    implementation project(':controller')
+    implementation project(':client')
+    implementation project(':ai-client')
+}

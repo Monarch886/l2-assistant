@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p modules)",
+      "Bash(mv domain:*)",
+      "Bash(./gradlew build:*)",
+      "Bash(rm -f \"F:/work/claude/MyMcp/L2Agent/modules/controller/src/main/java/ru/che/lcp/controller/IncidentController.java\")",
+      "Bash(rm -rf \"F:/work/claude/MyMcp/L2Agent/modules/controller/src/main/java/ru/che/lcp/controller/dto\")"
+    ]
+  }
+}
