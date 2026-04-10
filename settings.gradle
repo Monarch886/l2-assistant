@@ -1,0 +1,10 @@
+rootProject.name = 'L2Agent'
+
+include 'domain', 'usecase', 'controller', 'client', 'ai-client', 'infrastructure'
+
+project(':infrastructure').projectDir = file 'modules/infrastructure'
+project(':domain').projectDir = file 'modules/domain'
+project(':usecase').projectDir = file 'modules/usecase'
+project(':controller').projectDir = file 'modules/controller'
+project(':client').projectDir = file 'modules/client'
+project(':ai-client').projectDir = file 'modules/ai-client'

@@ -1,0 +1,12 @@
+name: l2-agent
+
+services:
+  l2-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: l2-agent
+    ports:
+      - "8080:8080"
+    environment:
+      OPENAI_API_KEY: ""

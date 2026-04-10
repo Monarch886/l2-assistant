@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: l2agent
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o
+          temperature: 0.2    # низкая температура — детерминированный структурированный вывод
+          max-tokens: 1024    # ограничение токенов на ответ — защита от runaway responses
+    retry:
+      max-attempts: 3         # 1 основной вызов + 2 ретрая
+      on-client-errors: false # не ретраить 4xx (bad request, auth) — токены сгорят впустую
+      backoff:
+        initial-interval: 1000  # 1s перед первым ретраем
+        multiplier: 2.0          # экспоненциальный backoff: 1s → 2s
+        max-interval: 4000       # не ждать дольше 4s
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      llm:
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 10          # анализируем последние 10 вызовов
+        failure-rate-threshold: 50       # открываем при >= 50% отказов
+        slow-call-duration-threshold: 10s
+        slow-call-rate-threshold: 80     # открываем если >= 80% вызовов > 10s
+        wait-duration-in-open-state: 30s # ждём 30s перед half-open
+        permitted-calls-in-half-open-state: 3  # пробуем 3 запроса в half-open
+        automatic-transition-from-open-to-half-open-enabled: true
+
+logging:
+  level:
+    ru.che.lcp: ${LOG_LEVEL:INFO}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    try-it-out-enabled: true

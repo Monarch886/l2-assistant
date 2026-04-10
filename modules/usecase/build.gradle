@@ -1,0 +1,9 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation project(':domain')
+    implementation project(':ai-client')
+    implementation project(':client')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+}

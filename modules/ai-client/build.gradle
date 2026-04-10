@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':domain')
+
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+}
